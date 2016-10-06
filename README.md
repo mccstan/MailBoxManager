@@ -1,0 +1,2 @@
+# MailBoxManager
+Mail boxes project
