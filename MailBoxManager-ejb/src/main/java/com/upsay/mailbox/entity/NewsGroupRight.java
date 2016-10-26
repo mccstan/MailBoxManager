@@ -30,6 +30,10 @@ public class NewsGroupRight implements Serializable {
         this.writeNewsGroup = writeNewsGroup;
     }
     
+    public NewsGroupRight() {
+        this.readNewsGroup = false;
+        this.writeNewsGroup = false;
+    }    
     
     
     

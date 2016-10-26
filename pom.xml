@@ -7,8 +7,6 @@
   <packaging>pom</packaging>
   <name>MailBoxManager</name>
   <modules>
-    <module>MailBoxManager-ear</module>
-    <module>MailBoxManager-web</module>
     <module>MailBoxManager-ejb</module>
   </modules>
 </project>
