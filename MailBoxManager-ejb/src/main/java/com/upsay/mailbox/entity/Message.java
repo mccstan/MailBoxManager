@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.upsay.ejb.mailbox;
+package com.upsay.mailbox.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +23,10 @@ public class Message implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    public Message() {
+        id = 0L;
+    }
     
     private String senderName; 
     private String receiverName;
@@ -85,33 +90,49 @@ public class Message implements Serializable {
     public void setIsRead(boolean isAlreadyRead) {
         this.isAlreadyRead = isAlreadyRead;
     }
-    
-    
-    
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 3;
+        hash = 83 * hash + Objects.hashCode(this.senderName);
+        hash = 83 * hash + Objects.hashCode(this.receiverName);
+        hash = 83 * hash + Objects.hashCode(this.sendingDate);
+        hash = 83 * hash + Objects.hashCode(this.subject);
+        hash = 83 * hash + Objects.hashCode(this.body);
+        hash = 83 * hash + (this.isAlreadyRead ? 1 : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Message)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Message other = (Message) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final Message other = (Message) obj;
+        if (this.isAlreadyRead != other.isAlreadyRead) {
+            return false;
+        }
+        if (!Objects.equals(this.senderName, other.senderName)) {
+            return false;
+        }
+        if (!Objects.equals(this.receiverName, other.receiverName)) {
+            return false;
+        }
+        if (!Objects.equals(this.subject, other.subject)) {
+            return false;
+        }
+        if (!Objects.equals(this.body, other.body)) {
+            return false;
+        }
+        return Objects.equals(this.sendingDate, other.sendingDate);
     }
-
-    @Override
-    public String toString() {
-        return "com.upsay.entity.Message[ id=" + id + " ]";
-    }
+    
+    
     
 }

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.upsay.ejb.mailbox;
+package com.upsay.mailbox.ejb;
 
+import com.upsay.mailbox.entity.MailBox;
 import java.util.ArrayList;
 
 /**

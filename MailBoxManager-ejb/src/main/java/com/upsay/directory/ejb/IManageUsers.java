@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.upsay.ejb.directory;
+package com.upsay.directory.ejb;
 
 /**
  *
  * @author mccstan
  */
-public interface IUserDirectory {
+public interface IManageUsers {
     
     public void addUser();
     public boolean removeUser();

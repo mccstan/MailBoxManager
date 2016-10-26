@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.upsay.ejb.directory;
+package com.upsay.directory.entity;
 
+import com.upsay.mailbox.entity.NewsGroupRight;
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 /**
@@ -16,22 +15,18 @@ import javax.persistence.OneToOne;
  * @author mccstan
  */
 @Entity
-public class FinalUser implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    private String username;
-    
+public class FinalMailBoxUser extends AbstractFinalUser implements Serializable {
+   
     @OneToOne
     private NewsGroupRight newsGroupRight;
 
-    public String getUsername() {
-        return username;
+    public FinalMailBoxUser() {
+        super();
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public FinalMailBoxUser(String username, String password) {
+        super(username, password);
     }
-    
     
     public NewsGroupRight getUserRight(){
         return this.newsGroupRight;

@@ -3,16 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.upsay.ejb.directory;
+package com.upsay.directory.ejb;
 
+import com.upsay.directory.entity.FinalMailBoxUser;
 import java.util.ArrayList;
 
 /**
  *
  * @author mccstan
  */
-public class UserDirectory implements IUserDirectory{
-    private ArrayList<FinalUser> finalUsers;
+public class DirectoryManager implements IManageUsers{
+    private ArrayList<FinalMailBoxUser> finalUsers;
 
     @Override
     public void addUser() {
