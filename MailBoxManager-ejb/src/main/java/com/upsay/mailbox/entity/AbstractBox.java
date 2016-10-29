@@ -8,6 +8,7 @@ package com.upsay.mailbox.entity;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -58,26 +59,39 @@ public abstract class AbstractBox implements Serializable{
     }
     
     public  boolean  deleteAMessage(Message message){
-        // TODO
+        this.allMessages.remove(message.getId(),message);
         return true;
     }
     public  boolean  deleteReadMessages(){
-        // TODO
+        for(Map.Entry<Long, Message> entry : this.allMessages.entrySet()) {
+             Long key = entry.getKey();
+             Message value = entry.getValue();
+             if(value.isRead()==true){
+                 this.allMessages.remove(key);
+             }
+        }
         return true;
     }
+    
     public  boolean  deleteAllMessages(){
-        // TODO
+        this.allMessages=null;
         return true;
     }
     
     public  Map<Long, Message>  readNewMessages(){
-        // TODO
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+       Map<Long,Message> newMessages = this.allMessages;
+       for(Entry<Long, Message> entry : this.allMessages.entrySet()) {
+             Long key = entry.getKey();
+             Message value = entry.getValue();
+             if(value.isRead()==true){
+                 newMessages.remove(key);
+             }
+        }
+       return newMessages;
+    }   
     
     public  Map<Long, Message>  readAllMessages(){
-        // TODO
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.allMessages;
     }
     
     

@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.persistence.OneToOne;
 
+
 /**
  *
  * @author mccstan
@@ -18,15 +19,14 @@ public class MailBox  extends AbstractBox{
     
     @OneToOne
     private FinalMailBoxUser owner;
-    
     private String mailBoxName;
+    
 
     public MailBox(FinalMailBoxUser owner, String mailBoxName) {
         this.owner = owner;
         this.mailBoxName = mailBoxName;
     }
     
-
     public FinalMailBoxUser getOwner() {
         return owner;
     }

@@ -35,6 +35,7 @@ public class Message implements Serializable {
     private String body;
     private boolean isAlreadyRead;
 
+
     public Long getId() {
         return id;
     }
