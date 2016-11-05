@@ -74,7 +74,7 @@ public abstract class AbstractBox implements Serializable{
     }
     
     public  boolean  deleteAllMessages(){
-        this.allMessages=null;
+        this.allMessages.clear();
         return true;
     }
     

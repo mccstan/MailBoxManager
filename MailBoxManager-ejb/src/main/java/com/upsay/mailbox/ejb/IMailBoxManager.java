@@ -18,13 +18,13 @@ import java.util.Map;
 public interface IMailBoxManager {
     
     
-    public Map<Long,Message> readAUserNewMessages(MailBox mailBox);
-    public Map<Long,Message> readAUserAllMessages(MailBox mailBox);
-    public boolean deleteAUserMessage();
+    public Map<Long,Message> readAUserNewMessages(FinalMailBoxUser user);
+    public Map<Long,Message> readAUserAllMessages(FinalMailBoxUser user);
+    public boolean deleteAUserMessage(FinalMailBoxUser usr ,Message message);
     public void deleteAUserReadMessages();
-    public void sendAMessageToABox();
+    public void sendAMessageToABox(FinalMailBoxUser recever ,Message message);
     public void addUser(FinalMailBoxUser user , String mailBoxName);
-    public boolean removeUser();
+    public boolean removeUser(FinalMailBoxUser user);
     public void sendNews();
     
 }
