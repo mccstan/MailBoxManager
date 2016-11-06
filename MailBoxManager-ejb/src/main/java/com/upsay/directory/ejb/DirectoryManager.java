@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author mccstan
+ * @author mccstan, slimani
  */
 public class DirectoryManager implements IManageUsers{
     private ArrayList<FinalMailBoxUser> finalUsers;

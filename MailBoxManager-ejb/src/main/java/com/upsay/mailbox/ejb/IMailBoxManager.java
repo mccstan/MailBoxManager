@@ -6,13 +6,12 @@
 package com.upsay.mailbox.ejb;
 
 import com.upsay.directory.entity.FinalMailBoxUser;
-import com.upsay.mailbox.entity.MailBox;
 import com.upsay.mailbox.entity.Message;
 import java.util.Map;
 
 /**
  *
- * @author mccstan
+ * @author mccstan, slimani
  * Mail Box Manager Interface.
  */
 public interface IMailBoxManager {

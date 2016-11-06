@@ -12,7 +12,7 @@ import javax.persistence.OneToOne;
 
 /**
  *
- * @author mccstan
+ * @author mccstan, slimani
  */
 @Entity
 public class FinalMailBoxUser extends AbstractFinalUser implements Serializable {

@@ -13,7 +13,7 @@ import javax.persistence.Id;
 
 /**
  *
- * @author mccstan
+ * @author mccstan, slimani
  */
 @Entity
 public class NewsGroupRight implements Serializable {

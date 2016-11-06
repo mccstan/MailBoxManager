@@ -15,7 +15,7 @@ import javax.persistence.Id;
 
 /**
  *
- * @author mccstan
+ * @author mccstan, slimani
  */
 @Entity
 public class Message implements Serializable {

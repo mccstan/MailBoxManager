@@ -6,20 +6,26 @@
 package com.upsay.mailbox.entity;
 
 import com.upsay.directory.entity.FinalMailBoxUser;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.Serializable;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 
 /**
  *
- * @author mccstan
+ * @author mccstan, slimani
  */
-public class MailBox  extends AbstractBox{
+@Entity
+@DiscriminatorValue("MailBox")
+public class MailBox  extends AbstractBox implements Serializable{
     
     @OneToOne
     private FinalMailBoxUser owner;
     private String mailBoxName;
+
+    public MailBox() {
+    }
     
 
     public MailBox(FinalMailBoxUser owner, String mailBoxName) {

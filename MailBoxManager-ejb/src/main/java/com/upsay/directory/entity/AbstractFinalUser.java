@@ -14,7 +14,7 @@ import javax.persistence.MappedSuperclass;
 
 /**
  *
- * @author mccstan
+ * @author mccstan, slimani
  */
 @MappedSuperclass
 public abstract class AbstractFinalUser implements Serializable{

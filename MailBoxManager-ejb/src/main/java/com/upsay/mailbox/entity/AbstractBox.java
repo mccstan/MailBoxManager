@@ -9,18 +9,22 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MapKey;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
 /**
  *
- * @author mccstan
+ * @author mccstan, slimani
  */
-@MappedSuperclass
+@Entity
+@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="TYPE_BOX")
 public abstract class AbstractBox implements Serializable{
     private static final long serialVersionUID = 1L;
     
@@ -28,8 +32,7 @@ public abstract class AbstractBox implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @OneToMany(mappedBy="abstractBox")
-    @MapKey(name="id")
+    @OneToMany
     private Map<Long, Message> allMessages;
 
     public AbstractBox() {

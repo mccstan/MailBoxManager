@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 
 /**
  *
- * @author mccstan
+ * @author mccstan, slimani
  */
 @Entity
 public class FinalManagerUser extends AbstractFinalUser implements Serializable {

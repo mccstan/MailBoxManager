@@ -8,30 +8,23 @@ import com.upsay.directory.entity.FinalMailBoxUser;
 import com.upsay.mailbox.entity.MailBox;
 import com.upsay.mailbox.entity.Message;
 import java.util.ArrayList;
-import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
-import java.util.Collection;
-import java.util.List;
-
-//import entity.*;
 import java.time.LocalDate;
 import java.util.Map;
-import java.util.Map.Entry;
 
 /**
  *
- * @author mccstan
+ * @author mccstan, slimani
  */
 
 
 @Stateless(name = "com.upsay.mailbox.ejb/IMailBoxManager")
 public class MailBoxManager implements IMailBoxManager {
 
-    @PersistenceContext(unitName = "pu1")
+    @PersistenceContext(unitName = "MailBoxPU")
     private EntityManager em;
     private ArrayList<MailBox> mailBoxes;
     private ArrayList<MailBox> newsBoxes;
@@ -106,5 +99,7 @@ public class MailBoxManager implements IMailBoxManager {
     public void sendNews() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
 
 }
