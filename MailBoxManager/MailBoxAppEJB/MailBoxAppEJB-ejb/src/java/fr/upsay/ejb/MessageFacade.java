@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.upsay.facade;
+package fr.upsay.ejb;
 
 import com.upsay.mailbox.entity.Message;
+import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,19 +15,19 @@ import javax.persistence.PersistenceContext;
  *
  * @author mccstan
  */
-@Stateless(name = "messageFacade")
+@Stateless
+@Remote(AbstractFacadeRemote.class)
 public class MessageFacade extends AbstractFacade<Message> {
 
     @PersistenceContext(unitName = "MailBoxPU")
     private EntityManager em;
 
     @Override
-    protected EntityManager getEntityManager() {
+    public EntityManager getEntityManager() {
         return em;
     }
 
     public MessageFacade() {
         super(Message.class);
     }
-    
 }
