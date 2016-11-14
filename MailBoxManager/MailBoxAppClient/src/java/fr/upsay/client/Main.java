@@ -5,7 +5,7 @@
  */
 package fr.upsay.client;
 
-import com.upsay.mailbox.entity.Message;
+import fr.upsay.mailbox.entity.Message;
 import fr.upsay.ejb.AbstractFacadeRemote;
 import fr.upsay.ejb.MySessionBeanRemote;
 import javax.ejb.EJB;

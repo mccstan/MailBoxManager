@@ -22,3 +22,9 @@ buildNumber.properties
 /MailBoxManager/MailBoxEntityLibrary/nbproject/private/
 /MailBoxManager/MailBoxEntityLibrary/build/
 /MailBoxManager/MailBoxEntityLibrary/dist/
+/MailBoxManager/MailBoxAppEJBRemoteInterface/build/
+/MailBoxManager/MailBoxAppEJBRemoteInterface/dist/
+/MailBoxManager/MailBoxAppEJBRemoteInterface/nbproject/private/
+/MailBoxEntityLibrary/build/
+/MailBoxEntityLibrary/dist/
+/MailBoxEntityLibrary/nbproject/private/

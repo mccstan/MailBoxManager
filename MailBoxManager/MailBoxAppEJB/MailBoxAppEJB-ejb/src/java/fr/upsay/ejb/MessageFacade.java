@@ -5,7 +5,7 @@
  */
 package fr.upsay.ejb;
 
-import com.upsay.mailbox.entity.Message;
+import fr.upsay.mailbox.entity.Message;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
