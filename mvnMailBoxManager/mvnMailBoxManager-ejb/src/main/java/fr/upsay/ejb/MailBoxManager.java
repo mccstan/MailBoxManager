@@ -8,6 +8,7 @@ import fr.upsay.directory.entity.FinalMailBoxUser;
 import fr.upsay.iejb.AbstractFacadeRemote;
 import fr.upsay.iejb.IMailBoxManager;
 import fr.upsay.mailbox.entity.Message;
+import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
@@ -25,7 +26,8 @@ public class MailBoxManager implements IMailBoxManager {
 
     @Override
     public Map<Long, Message> readAUserNewMessages(FinalMailBoxUser user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        FinalMailBoxUser userf = (FinalMailBoxUser) finalMailBoxUserFacade.find(user.getId());
+        return userf.getMailBox().readNewMessages();
         
     }
 
@@ -36,28 +38,34 @@ public class MailBoxManager implements IMailBoxManager {
     }
 
     @Override
-    public boolean deleteAUserMessage(FinalMailBoxUser usr, Message message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean deleteAUserMessage(FinalMailBoxUser user, Message message) {
+        FinalMailBoxUser userf = (FinalMailBoxUser) finalMailBoxUserFacade.find(user.getId());
+        return userf.getMailBox().deleteAMessage(message);
+        
     }
 
     @Override
     public void deleteAUserReadMessages() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // je ne vois pas l'utilité
     }
 
     @Override
     public void sendAMessageToABox(FinalMailBoxUser recever, Message message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        FinalMailBoxUser userf = (FinalMailBoxUser) finalMailBoxUserFacade.find(recever.getId());
+        userf.getMailBox().addMessage(message);
+        
+        
     }
 
     @Override
     public void addUser(FinalMailBoxUser user, String mailBoxName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
 
     @Override
     public boolean removeUser(FinalMailBoxUser user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        return true ;  
     }
 
     @Override
