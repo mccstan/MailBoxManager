@@ -52,21 +52,21 @@ public class TestEJB extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
         System.out.println("Call : "+mySessionBean.getResult());
-        /*
+        
         Message message1 = new Message("subject1", "Body1");
         Message message2 = new Message("subject2", "Body2");
         Message message3 = new Message("subject3", "Body3");
         messageFacade.create(message1);
         messageFacade.create(message2);
         messageFacade.create(message3);
-        */
-         
+        
+         /*
             FinalMailBoxUser boxUser = new FinalMailBoxUser("mccstan2", "st@n");
             NewsGroupRight groupRight = new NewsGroupRight(true, true);
             boxUser.updateUserRight(groupRight);
             messageFacade.findAll();
             finalMailBoxUserFacade.create(boxUser);
-            
+            */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -76,7 +76,6 @@ public class TestEJB extends HttpServlet {
             out.println("<h1>Servlet TestEJB  is working " + request.getContextPath() + "</h1>");
             out.println("<h1>This is a bean call " + mySessionBean.getResult() + "</h1>");
             out.println("<h1>Message count : " +messageFacade.count()+ "</h1>");
-            out.println("<h1>finalMailBoxUserFacade count : " +finalMailBoxUserFacade.count()+ "</h1>");
             
             out.println("</body>");
             out.println("</html>");
