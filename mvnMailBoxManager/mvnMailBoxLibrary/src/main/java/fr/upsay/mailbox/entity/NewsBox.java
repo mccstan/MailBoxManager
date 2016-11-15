@@ -14,7 +14,6 @@ import javax.persistence.Entity;
  * @author mccstan, slimani
  */
 @Entity
-@DiscriminatorValue("NewsBox")
 public class NewsBox  extends AbstractBox implements Serializable{
     private static final long serialVersionUID = 1L;
     public static enum newsBoxTypes {BROADCAST, MULTICAST};    

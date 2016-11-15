@@ -23,8 +23,8 @@ import javax.persistence.OneToMany;
  * @author mccstan, slimani
  */
 @Entity
-@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="TYPE_BOX")
+/*@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="TYPE_BOX")*/
 public abstract class AbstractBox implements Serializable{
     private static final long serialVersionUID = 1L;
     

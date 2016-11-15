@@ -8,8 +8,8 @@ package fr.upsay.servlet;
 import fr.upsay.directory.entity.FinalMailBoxUser;
 import fr.upsay.iejb.AbstractFacadeRemote;
 import fr.upsay.iejb.MySessionBeanRemote;
+import fr.upsay.mailbox.entity.MailBox;
 import fr.upsay.mailbox.entity.Message;
-import fr.upsay.mailbox.entity.NewsBox;
 import fr.upsay.mailbox.entity.NewsGroupRight;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,6 +40,9 @@ public class TestEJB extends HttpServlet {
     @Resource(mappedName = "messageFacade")
     AbstractFacadeRemote messageFacade;
     
+    @Resource(mappedName = "mailBoxFacade")
+    AbstractFacadeRemote mailBoxFacade;
+    
     @Resource(mappedName = "finalMailBoxUserFacade")
     AbstractFacadeRemote finalMailBoxUserFacade;
     
@@ -56,17 +59,19 @@ public class TestEJB extends HttpServlet {
         Message message1 = new Message("subject1", "Body1");
         Message message2 = new Message("subject2", "Body2");
         Message message3 = new Message("subject3", "Body3");
-        messageFacade.create(message1);
-        messageFacade.create(message2);
-        messageFacade.create(message3);
         
-         /*
-            FinalMailBoxUser boxUser = new FinalMailBoxUser("mccstan2", "st@n");
+         
+            FinalMailBoxUser boxUser = new FinalMailBoxUser("mccstan", "st@n");
             NewsGroupRight groupRight = new NewsGroupRight(true, true);
             boxUser.updateUserRight(groupRight);
-            messageFacade.findAll();
-            finalMailBoxUserFacade.create(boxUser);
-            */
+            
+            MailBox mailBox = new MailBox(boxUser, ",mainBox");
+           mailBox.addMessage(message1);
+           mailBox.addMessage(message2);
+           mailBox.addMessage(message3);
+           
+           mailBoxFacade.create(mailBox);
+            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -75,8 +80,6 @@ public class TestEJB extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Servlet TestEJB  is working " + request.getContextPath() + "</h1>");
             out.println("<h1>This is a bean call " + mySessionBean.getResult() + "</h1>");
-            out.println("<h1>Message count : " +messageFacade.count()+ "</h1>");
-            
             out.println("</body>");
             out.println("</html>");
         }
