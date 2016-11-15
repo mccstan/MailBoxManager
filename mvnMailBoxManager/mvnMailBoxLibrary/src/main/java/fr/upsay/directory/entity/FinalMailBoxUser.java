@@ -5,6 +5,7 @@
  */
 package fr.upsay.directory.entity;
 
+import fr.upsay.mailbox.entity.MailBox;
 import fr.upsay.mailbox.entity.NewsGroupRight;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
@@ -20,6 +21,9 @@ public class FinalMailBoxUser extends AbstractFinalUser implements Serializable 
    
     @OneToOne(cascade = CascadeType.PERSIST)
     private NewsGroupRight newsGroupRight;
+    
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private MailBox mailBox;
 
     public FinalMailBoxUser() {
         super();
@@ -34,6 +38,14 @@ public class FinalMailBoxUser extends AbstractFinalUser implements Serializable 
     }
     public void updateUserRight(NewsGroupRight newsGroupRight){
         this.newsGroupRight = newsGroupRight;
+    }
+
+    public NewsGroupRight getNewsGroupRight() {
+        return newsGroupRight;
+    }
+
+    public MailBox getMailBox() {
+        return mailBox;
     }
     
 }

@@ -17,11 +17,11 @@ import javax.persistence.OneToOne;
  * @author mccstan, slimani
  */
 @Entity
-@DiscriminatorValue("MailBox")
 public class MailBox  extends AbstractBox implements Serializable{
     
     @OneToOne
     private FinalMailBoxUser owner;
+    
     private String mailBoxName;
 
     public MailBox() {
