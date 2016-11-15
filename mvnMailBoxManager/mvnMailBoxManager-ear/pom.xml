@@ -42,13 +42,13 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>com.upsay</groupId>
+            <groupId>fr.upsay</groupId>
             <artifactId>mvnMailBoxManager-ejb</artifactId>
             <version>1.0</version>
             <type>ejb</type>
         </dependency>
         <dependency>
-            <groupId>com.upsay</groupId>
+            <groupId>fr.upsay</groupId>
             <artifactId>mvnMailBoxManager-web</artifactId>
             <version>1.0</version>
             <type>war</type>
