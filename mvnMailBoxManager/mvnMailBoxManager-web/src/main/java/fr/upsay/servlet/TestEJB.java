@@ -7,12 +7,15 @@ package fr.upsay.servlet;
 
 import fr.upsay.directory.entity.FinalMailBoxUser;
 import fr.upsay.iejb.AbstractFacadeRemote;
+import fr.upsay.iejb.IMailBoxManager;
+import fr.upsay.iejb.IManageUsers;
 import fr.upsay.mailbox.entity.MailBox;
 import fr.upsay.mailbox.entity.Message;
 import fr.upsay.mailbox.entity.NewsGroupRight;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.annotation.Resource;
+import javax.naming.spi.DirectoryManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,6 +41,12 @@ public class TestEJB extends HttpServlet {
     @Resource(mappedName = "mailBoxFacade")
     AbstractFacadeRemote mailBoxFacade;
     
+    @Resource(mappedName = "mailBoxManager")
+     IMailBoxManager mailBoxManager;
+    
+    @Resource(mappedName = "directoryManager")
+    IManageUsers directoryManager;
+    
     /*
     @Resource(mappedName = "mailBoxFacade")
     AbstractFacadeRemote mailBoxFacade;
@@ -51,23 +60,27 @@ public class TestEJB extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-        /*
+       /*  
         Message message1 = new Message("subject1", "Body1");
         Message message2 = new Message("subject2", "Body2");
         Message message3 = new Message("subject3", "Body3");
         
          
-            FinalMailBoxUser boxUser = new FinalMailBoxUser("mccstan", "st@n");
-            NewsGroupRight groupRight = new NewsGroupRight(true, true);
-            boxUser.updateUserRight(groupRight);
+          FinalMailBoxUser boxUser = new FinalMailBoxUser("mccstan", "st@n");
+           NewsGroupRight groupRight = new NewsGroupRight(true, true);
+           boxUser.updateUserRight(groupRight);
             
-            MailBox mailBox = new MailBox(boxUser, "mainBox");
+           MailBox mailBox = new MailBox(boxUser, "mainBox");
            mailBox.addMessage(message1);
            mailBox.addMessage(message2);
-           mailBox.addMessage(message3);
-           
-           mailBoxFacade.create(mailBox);
-           */
+           mailBox.addMessage(message3);   
+           mailBoxFacade.create(mailBox);*/
+        
+        
+        //test
+        FinalMailBoxUser user = new FinalMailBoxUser("yacine","1234");
+        directoryManager.addUser(user);
+            
             
             out.println("<!DOCTYPE html>");
             out.println("<html>");

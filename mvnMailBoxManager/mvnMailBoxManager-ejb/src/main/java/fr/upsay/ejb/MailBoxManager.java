@@ -9,6 +9,7 @@ import fr.upsay.iejb.AbstractFacadeRemote;
 import fr.upsay.iejb.IMailBoxManager;
 import fr.upsay.mailbox.entity.MailBox;
 import fr.upsay.mailbox.entity.Message;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
@@ -20,7 +21,7 @@ import javax.ejb.Stateless;
  * @author mccstan, slimani
  */
 
-@Stateless(mappedName = "directoryManager")
+@Stateless(mappedName = "mailBoxManager")
 @Remote(IMailBoxManager.class)
 public class MailBoxManager implements IMailBoxManager {
     private ArrayList<FinalMailBoxUser> boxUsers;
@@ -48,15 +49,23 @@ public class MailBoxManager implements IMailBoxManager {
     @Override
     public boolean deleteAUserMessage(FinalMailBoxUser user, Message message) {
         FinalMailBoxUser userf = (FinalMailBoxUser) finalMailBoxUserFacade.find(user.getId());
-        return userf.getMailBox().deleteAMessage(message);
-        
+         MailBox box = userf.getMailBox();
+         box.deleteAMessage(message);
+         mailBoxFacade.edit(box);
+        return true ;
     }
 
 
     @Override
     public void sendAMessageToABox(FinalMailBoxUser sender, FinalMailBoxUser receiver, Message message) {
         FinalMailBoxUser userf = (FinalMailBoxUser) finalMailBoxUserFacade.find(receiver.getId());
-        userf.getMailBox().addMessage(message);
+        MailBox box = userf.getMailBox();
+        message.setSenderName(sender.getUsername());
+        message.setReceiverName(receiver.getUsername());
+        message.setSendingDate(LocalDate.now());
+        message.setIsRead(false);
+        box.addMessage(message);
+        mailBoxFacade.edit(box);
     }
 
     @Override
