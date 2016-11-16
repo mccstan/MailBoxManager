@@ -73,6 +73,7 @@ public class MailBoxManager implements IMailBoxManager {
             MailBox box = user.getMailBox();
             box.addMessage(message);
             mailBoxFacade.edit(box);
+            
         }
     }
 }
