@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 package fr.upsay.ejb;
+import fr.upsay.directory.entity.AbstractFinalUser;
 import fr.upsay.directory.entity.FinalMailBoxUser;
 import fr.upsay.iejb.AbstractFacadeRemote;
 import fr.upsay.iejb.IMailBoxManager;
+import fr.upsay.iejb.IManageUsers;
 import fr.upsay.mailbox.entity.MailBox;
 import fr.upsay.mailbox.entity.Message;
 import java.time.LocalDate;
@@ -29,6 +31,9 @@ public class MailBoxManager implements IMailBoxManager {
 
     @Resource(mappedName = "finalMailBoxUserFacade")
     AbstractFacadeRemote finalMailBoxUserFacade;
+    
+    @Resource(mappedName = "directoryManager")
+    IManageUsers directoryManager;
 
     @Resource(mappedName = "mailBoxFacade")
     AbstractFacadeRemote mailBoxFacade;
@@ -58,14 +63,29 @@ public class MailBoxManager implements IMailBoxManager {
 
     @Override
     public void sendAMessageToABox(FinalMailBoxUser sender, FinalMailBoxUser receiver, Message message) {
-        FinalMailBoxUser userf = (FinalMailBoxUser) finalMailBoxUserFacade.find(receiver.getId());
+        List<FinalMailBoxUser> l = finalMailBoxUserFacade.findAll();
+        System.out.println("je suis la 2");
+        FinalMailBoxUser userf=null;
+       for(FinalMailBoxUser u : l){
+           System.out.println("blabla = "+u.getUsername());
+           if(u.getUsername().equals(receiver.getUsername())){
+               userf=u;
+           }
+       }
+       System.out.println("je suis le sender = " + userf.getUsername());
         MailBox box = userf.getMailBox();
         message.setSenderName(sender.getUsername());
         message.setReceiverName(receiver.getUsername());
         message.setSendingDate(LocalDate.now());
         message.setIsRead(false);
+        System.out.println("c'est moi qui bug"+ box.getMailBoxName());
+        
         box.addMessage(message);
+        System.out.println("non c'est moi");
         mailBoxFacade.edit(box);
+        
+       
+        
     }
 
     @Override

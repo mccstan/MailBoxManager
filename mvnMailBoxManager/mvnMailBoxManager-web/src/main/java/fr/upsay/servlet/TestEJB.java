@@ -41,6 +41,9 @@ public class TestEJB extends HttpServlet {
     @Resource(mappedName = "mailBoxFacade")
     AbstractFacadeRemote mailBoxFacade;
     
+    @Resource(mappedName = "finalMailBoxUserFacade")
+    AbstractFacadeRemote finalMailBoxUserFacade;
+    
     @Resource(mappedName = "mailBoxManager")
      IMailBoxManager mailBoxManager;
     
@@ -77,10 +80,21 @@ public class TestEJB extends HttpServlet {
            mailBoxFacade.create(mailBox);*/
         
         
-        //test
-        FinalMailBoxUser user = new FinalMailBoxUser("yacine","1234");
-        directoryManager.addUser(user);
-            
+        //test creation de deux user
+        FinalMailBoxUser user1 = new FinalMailBoxUser("yacine","1234");
+        directoryManager.addUser(user1);
+        
+        FinalMailBoxUser user2 = new FinalMailBoxUser("Maturin","1234");
+        directoryManager.addUser(user2);
+        
+        Message m1 = new Message ("subject1","body1");
+        Message m2 = new Message ("subject2","body2");
+        
+        mailBoxManager.sendAMessageToABox(user1, user2, m1);
+        mailBoxManager.sendAMessageToABox(user1, user2, m2);
+        
+        
+        
             
             out.println("<!DOCTYPE html>");
             out.println("<html>");
