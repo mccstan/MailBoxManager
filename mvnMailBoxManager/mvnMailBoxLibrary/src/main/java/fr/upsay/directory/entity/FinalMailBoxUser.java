@@ -10,6 +10,7 @@ import fr.upsay.mailbox.entity.NewsGroupRight;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 /**
@@ -19,7 +20,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class FinalMailBoxUser extends AbstractFinalUser implements Serializable {
    
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private NewsGroupRight newsGroupRight;
     
     @OneToOne(cascade = CascadeType.PERSIST)

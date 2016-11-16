@@ -5,15 +5,20 @@
  */
 package fr.upsay.iejb;
 
+import fr.upsay.directory.entity.AbstractFinalUser;
+import fr.upsay.directory.entity.FinalMailBoxUser;
+import fr.upsay.mailbox.entity.NewsGroupRight;
+import java.util.List;
+
 /**
  *
  * @author mccstan
  */
 public interface IManageUsers {
     
-    public void addUser();
-    public boolean removeUser();
-    public void lookupAllUsers();
-    public void lookupAUserRights();
-    public void updateAUserRights();
+    public boolean addUser(FinalMailBoxUser finalUser);
+    public boolean removeUser(FinalMailBoxUser finalUser);
+    public List<AbstractFinalUser> lookupAllUsers();
+    public NewsGroupRight lookupAUserRights( FinalMailBoxUser finalMailBoxUser);
+    public boolean updateAUserRights(FinalMailBoxUser finalUser, NewsGroupRight newsGroupRight);
 }

@@ -8,7 +8,6 @@ package fr.upsay.iejb;
 import fr.upsay.directory.entity.FinalMailBoxUser;
 import fr.upsay.mailbox.entity.Message;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -20,11 +19,9 @@ public interface IMailBoxManager {
     
     public List<Message> readAUserNewMessages(FinalMailBoxUser user);
     public List<Message> readAUserAllMessages(FinalMailBoxUser user);
-    public boolean deleteAUserMessage(FinalMailBoxUser usr ,Message message);
-    public void deleteAUserReadMessages();
-    public void sendAMessageToABox(FinalMailBoxUser recever ,Message message);
-    public void addUser(FinalMailBoxUser user , String mailBoxName);
-    public boolean removeUser(FinalMailBoxUser user);
-    public void sendNews();
+    public boolean deleteAUserMessage(FinalMailBoxUser user ,Message message);
+    public void deleteAUserReadMessages(FinalMailBoxUser user);
+    public void sendAMessageToABox(FinalMailBoxUser sender, FinalMailBoxUser receiver ,Message message);
+    public void sendNews(FinalMailBoxUser sender, Message message);
     
 }

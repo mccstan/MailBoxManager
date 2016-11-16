@@ -35,19 +35,23 @@ public class TestEJB extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Resource(mappedName = "mailBoxFacade")
+    AbstractFacadeRemote mailBoxFacade;
     
+    /*
     @Resource(mappedName = "mailBoxFacade")
     AbstractFacadeRemote mailBoxFacade;
     
     @Resource(mappedName = "finalMailBoxUserFacade")
     AbstractFacadeRemote finalMailBoxUserFacade;
+    */
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-        
+        /*
         Message message1 = new Message("subject1", "Body1");
         Message message2 = new Message("subject2", "Body2");
         Message message3 = new Message("subject3", "Body3");
@@ -63,6 +67,7 @@ public class TestEJB extends HttpServlet {
            mailBox.addMessage(message3);
            
            mailBoxFacade.create(mailBox);
+           */
             
             out.println("<!DOCTYPE html>");
             out.println("<html>");
