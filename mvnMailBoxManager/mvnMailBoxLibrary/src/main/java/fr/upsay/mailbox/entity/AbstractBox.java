@@ -6,16 +6,13 @@
 package fr.upsay.mailbox.entity;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import javax.persistence.DiscriminatorColumn;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
 /**
@@ -32,11 +29,11 @@ public abstract class AbstractBox implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @OneToMany
-    private Map<Long, Message> allMessages;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private List<Message> allMessages;
 
     public AbstractBox() {
-        this.allMessages = new HashMap<>();
+        this.allMessages = new ArrayList<>();
     }
 
     public Long getId() {
@@ -47,32 +44,28 @@ public abstract class AbstractBox implements Serializable{
         this.id = id;
     }
 
-    public Map<Long, Message> getAllMessages() {
+    public List<Message> getAllMessages() {
         return allMessages;
     }
 
-    public void setAllMessages(Map<Long, Message> allMessages) {
+    public void setAllMessages(List<Message> allMessages) {
         this.allMessages = allMessages;
     }
     
      
     public  boolean addMessage(Message message){
-        this.allMessages.put(message.getId(), message);
+        this.allMessages.add(message);
         return true;
     }
     
     public  boolean  deleteAMessage(Message message){
-        this.allMessages.remove(message.getId(),message);
+        this.allMessages.remove(message);
         return true;
     }
     public  boolean  deleteReadMessages(){
-        for(Map.Entry<Long, Message> entry : this.allMessages.entrySet()) {
-             Long key = entry.getKey();
-             Message value = entry.getValue();
-             if(value.isRead()==true){
-                 this.allMessages.remove(key);
-             }
-        }
+        allMessages.stream().filter((m) -> (m.isRead()==true)).forEachOrdered((m) -> {
+            this.allMessages.remove(m);
+        });
         return true;
     }
     
@@ -81,19 +74,15 @@ public abstract class AbstractBox implements Serializable{
         return true;
     }
     
-    public  Map<Long, Message>  readNewMessages(){
-       Map<Long,Message> newMessages = this.allMessages;
-       for(Entry<Long, Message> entry : this.allMessages.entrySet()) {
-             Long key = entry.getKey();
-             Message value = entry.getValue();
-             if(value.isRead()==true){
-                 newMessages.remove(key);
-             }
-        }
+    public  List<Message>  readNewMessages(){
+       List<Message> newMessages = this.allMessages;
+        allMessages.stream().filter((m) -> (m.isRead()==true)).forEachOrdered((m) -> {
+            this.allMessages.remove(m);
+        });
        return newMessages;
     }   
     
-    public  Map<Long, Message>  readAllMessages(){
+    public  List<Message>  readAllMessages(){
         return this.allMessages;
     }
     

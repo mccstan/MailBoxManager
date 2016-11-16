@@ -25,14 +25,14 @@ public class MailBoxManager implements IMailBoxManager {
     AbstractFacadeRemote finalMailBoxUserFacade;
 
     @Override
-    public Map<Long, Message> readAUserNewMessages(FinalMailBoxUser user) {
+    public List<Message> readAUserNewMessages(FinalMailBoxUser user) {
         FinalMailBoxUser userf = (FinalMailBoxUser) finalMailBoxUserFacade.find(user.getId());
         return userf.getMailBox().readNewMessages();
         
     }
 
     @Override
-    public Map<Long, Message> readAUserAllMessages(FinalMailBoxUser user) {
+    public List<Message> readAUserAllMessages(FinalMailBoxUser user) {
         FinalMailBoxUser userf = (FinalMailBoxUser) finalMailBoxUserFacade.find(user.getId());
         return userf.getMailBox().getAllMessages();
     }

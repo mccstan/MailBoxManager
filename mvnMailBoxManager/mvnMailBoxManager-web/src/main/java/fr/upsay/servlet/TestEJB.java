@@ -7,14 +7,12 @@ package fr.upsay.servlet;
 
 import fr.upsay.directory.entity.FinalMailBoxUser;
 import fr.upsay.iejb.AbstractFacadeRemote;
-import fr.upsay.iejb.MySessionBeanRemote;
 import fr.upsay.mailbox.entity.MailBox;
 import fr.upsay.mailbox.entity.Message;
 import fr.upsay.mailbox.entity.NewsGroupRight;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.annotation.Resource;
-import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,8 +35,6 @@ public class TestEJB extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Resource(mappedName = "messageFacade")
-    AbstractFacadeRemote messageFacade;
     
     @Resource(mappedName = "mailBoxFacade")
     AbstractFacadeRemote mailBoxFacade;
@@ -46,15 +42,11 @@ public class TestEJB extends HttpServlet {
     @Resource(mappedName = "finalMailBoxUserFacade")
     AbstractFacadeRemote finalMailBoxUserFacade;
     
-    @EJB
-    MySessionBeanRemote mySessionBean;
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-        System.out.println("Call : "+mySessionBean.getResult());
         
         Message message1 = new Message("subject1", "Body1");
         Message message2 = new Message("subject2", "Body2");
@@ -65,7 +57,7 @@ public class TestEJB extends HttpServlet {
             NewsGroupRight groupRight = new NewsGroupRight(true, true);
             boxUser.updateUserRight(groupRight);
             
-            MailBox mailBox = new MailBox(boxUser, ",mainBox");
+            MailBox mailBox = new MailBox(boxUser, "mainBox");
            mailBox.addMessage(message1);
            mailBox.addMessage(message2);
            mailBox.addMessage(message3);
@@ -79,7 +71,6 @@ public class TestEJB extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet TestEJB  is working " + request.getContextPath() + "</h1>");
-            out.println("<h1>This is a bean call " + mySessionBean.getResult() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

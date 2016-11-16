@@ -7,6 +7,7 @@ package fr.upsay.mailbox.entity;
 
 import fr.upsay.directory.entity.FinalMailBoxUser;
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
@@ -19,7 +20,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class MailBox  extends AbstractBox implements Serializable{
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private FinalMailBoxUser owner;
     
     private String mailBoxName;
