@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package fr.upsay.ejb;
-import fr.upsay.directory.entity.AbstractFinalUser;
 import fr.upsay.directory.entity.FinalMailBoxUser;
 import fr.upsay.iejb.AbstractFacadeRemote;
 import fr.upsay.iejb.IMailBoxManager;
@@ -26,7 +25,7 @@ import javax.ejb.Stateless;
 @Stateless(mappedName = "mailBoxManager")
 @Remote(IMailBoxManager.class)
 public class MailBoxManager implements IMailBoxManager {
-    private ArrayList<FinalMailBoxUser> boxUsers;
+    private List<FinalMailBoxUser> boxUsers;
     private ArrayList<MailBox> mailBoxes;
 
     @Resource(mappedName = "finalMailBoxUserFacade")
@@ -63,31 +62,6 @@ public class MailBoxManager implements IMailBoxManager {
 
     @Override
     public void sendAMessageToABox(FinalMailBoxUser sender, FinalMailBoxUser receiver, Message message) {
-       /*
-        List<FinalMailBoxUser> l = finalMailBoxUserFacade.findAll();
-        System.out.println("je suis la 2");
-        FinalMailBoxUser userf=null;
-       for(FinalMailBoxUser u : l){
-           System.out.println("blabla = "+u.getUsername());
-           if(u.getUsername().equals(receiver.getUsername())){
-               userf=u;
-           }
-       }
-       System.out.println("je suis le sender = " + userf.getUsername());
-        MailBox box = userf.getMailBox();
-        message.setSenderName(sender.getUsername());
-        message.setReceiverName(receiver.getUsername());
-        message.setSendingDate(LocalDate.now());
-        message.setIsRead(false);
-        System.out.println("c'est moi qui bug"+ box.getMailBoxName());
-        
-        box.addMessage(message);
-        
-        System.out.println("non c'est moi");
-        mailBoxFacade.edit(box);
-        
-        */
-       
         message.setSenderName(sender.getUsername());
         message.setReceiverName(receiver.getUsername());
         message.setSendingDate(LocalDate.now());
@@ -112,15 +86,21 @@ public class MailBoxManager implements IMailBoxManager {
     }
 
     @Override
-    public void sendNews(FinalMailBoxUser sender, Message message) {
-        this.boxUsers = (ArrayList<FinalMailBoxUser>) finalMailBoxUserFacade.findAll();
+    public String sendNews(FinalMailBoxUser sender, Message message) {
+        FinalMailBoxUser userf = (FinalMailBoxUser) finalMailBoxUserFacade.find(sender.getId());
+        System.out.println(sender.getUserRight().getWriteAccess());
+        if(sender.getUserRight().getWriteAccess()==true){
+        this.boxUsers =  finalMailBoxUserFacade.findAll();
         message.setSenderName(sender.getUsername());
         message.setReceiverName("NewsBox");
+        message.setSendingDate(LocalDate.now());
         for(FinalMailBoxUser user:this.boxUsers){
             MailBox box = user.getMailBox();
             box.addMessage(message);
-            mailBoxFacade.edit(box);
-            
+            mailBoxFacade.edit(box);   
         }
+        return "Message envoyé";
+        }
+        return "Accés refusé";
     }
 }

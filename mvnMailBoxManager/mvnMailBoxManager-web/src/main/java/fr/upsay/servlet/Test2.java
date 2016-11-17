@@ -5,20 +5,15 @@
  */
 package fr.upsay.servlet;
 
-import fr.upsay.directory.entity.AbstractFinalUser;
 import fr.upsay.directory.entity.FinalMailBoxUser;
 import fr.upsay.iejb.AbstractFacadeRemote;
 import fr.upsay.iejb.IMailBoxManager;
 import fr.upsay.iejb.IManageUsers;
-import fr.upsay.mailbox.entity.MailBox;
 import fr.upsay.mailbox.entity.Message;
-import fr.upsay.mailbox.entity.NewsGroupRight;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
-import javax.naming.spi.DirectoryManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -65,36 +60,30 @@ public class Test2 extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-       /*  
-        Message message1 = new Message("subject1", "Body1");
-        Message message2 = new Message("subject2", "Body2");
-        Message message3 = new Message("subject3", "Body3");
-        
          
-          FinalMailBoxUser boxUser = new FinalMailBoxUser("mccstan", "st@n");
-           NewsGroupRight groupRight = new NewsGroupRight(true, true);
-           boxUser.updateUserRight(groupRight);
-            
-           MailBox mailBox = new MailBox(boxUser, "mainBox");
-           mailBox.addMessage(message1);
-           mailBox.addMessage(message2);
-           mailBox.addMessage(message3);   
-           mailBoxFacade.create(mailBox);*/
-        
+            //recuperation des deux usres
          List<FinalMailBoxUser> boxUsers = directoryManager.lookupAllUsers();
-        
          FinalMailBoxUser user1 = boxUsers.get(0);
          FinalMailBoxUser user2 = boxUsers.get(1);
          
+         //creation des messages à envoyer
         Message m1 = new Message ("subject1","body1");
         Message m2 = new Message ("subject2","body2");
+        Message m3 = new Message ("subject3","body3");
+        Message m4 = new Message ("subject4","body4");
         
+        //envoi de messages entre les utilisateur
         mailBoxManager.sendAMessageToABox(user1, user2, m1);
-        mailBoxManager.sendAMessageToABox(user2, user1, m2);
+        mailBoxManager.sendAMessageToABox(user1, user2, m2);
         
+        mailBoxManager.sendAMessageToABox(user2, user1, m3);
+        mailBoxManager.sendAMessageToABox(user2, user1, m4);
         
-        
+        //recuperation de la liste des messages pour chaque utilisateur
+       List<Message> listMessag2 = mailBoxManager.readAUserAllMessages(user2);
+       List<Message> listMessag1 = mailBoxManager.readAUserAllMessages(user1);
+         System.out.println("la taille 1 "+listMessag1.size());
+         System.out.println("la taille 1 "+listMessag2.size());
             
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -102,7 +91,48 @@ public class Test2 extends HttpServlet {
             out.println("<title>Servlet TestEJB</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet TestEJB  is working " + request.getContextPath() + "</h1>");
+            out.println("<h3>1- Envoi des message entre utilisateurs</h3>");
+            out.println("User1 ---> User2 : m1 = (\"subject1\",\"body1\") | m2 = (\"subject2\",\"body2\")</br>");
+            out.println("User2 ---> User1 : m3 = (\"subject3\",\"body3\") | m4 = (\"subject4\",\"body4\")");
+            
+            out.println("<h3>2- Recuperation de la base de données les message pour chaque utilisateur</h3>");
+           
+            out.println("<ul style=\"list-style-type:disc\">");
+            out.println("<li>Id = "+listMessag1.get(0).getId()+"</li>");
+            out.println("<li>subject = "+listMessag1.get(0).getSubject()+"</li>");
+            out.println("<li>ReceiverName = "+listMessag1.get(0).getReceiverName()+"</li>");
+            out.println("<li>SenderName = "+listMessag1.get(0).getSenderName()+"</li>");
+            out.println("<li>Body = "+listMessag1.get(0).getBody()+"</li>");
+            out.println("<li>SendingDate = "+listMessag1.get(0).getSendingDate()+"</li>");
+            out.println("</ul>");
+            
+            out.println("<ul style=\"list-style-type:disc\">");
+            out.println("<li>Id = "+listMessag1.get(1).getId()+"</li>");
+            out.println("<li>subject = "+listMessag1.get(1).getSubject()+"</li>");
+            out.println("<li>ReceiverName = "+listMessag1.get(1).getReceiverName()+"</li>");
+            out.println("<li>SenderName = "+listMessag1.get(1).getSenderName()+"</li>");
+            out.println("<li>Body = "+listMessag1.get(1).getBody()+"</li>");
+            out.println("<li>SendingDate = "+listMessag1.get(1).getSendingDate()+"</li>");
+            out.println("</ul>");
+            
+            out.println("<ul style=\"list-style-type:disc\">");
+            out.println("<li>Id = "+listMessag2.get(1).getId()+"</li>");
+            out.println("<li>subject = "+listMessag2.get(1).getSubject()+"</li>");
+            out.println("<li>ReceiverName = "+listMessag2.get(1).getReceiverName()+"</li>");
+            out.println("<li>SenderName = "+listMessag2.get(1).getSenderName()+"</li>");
+            out.println("<li>Body = "+listMessag2.get(1).getBody()+"</li>");
+            out.println("<li>SendingDate = "+listMessag2.get(1).getSendingDate()+"</li>");
+            out.println("</ul>");
+            
+            out.println("<ul style=\"list-style-type:disc\">");
+            out.println("<li>Id = "+listMessag2.get(0).getId()+"</li>");
+            out.println("<li>subject = "+listMessag2.get(0).getSubject()+"</li>");
+            out.println("<li>ReceiverName = "+listMessag2.get(0).getReceiverName()+"</li>");
+            out.println("<li>SenderName = "+listMessag2.get(0).getSenderName()+"</li>");
+            out.println("<li>Body = "+listMessag2.get(0).getBody()+"</li>");
+            out.println("<li>SendingDate = "+listMessag2.get(0).getSendingDate()+"</li>");
+            out.println("</ul>");
+            
             out.println("</body>");
             out.println("</html>");
         }

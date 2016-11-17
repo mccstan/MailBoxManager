@@ -22,6 +22,6 @@ public interface IMailBoxManager {
     public boolean deleteAUserMessage(FinalMailBoxUser user ,Message message);
     public void deleteAUserReadMessages(FinalMailBoxUser user);
     public void sendAMessageToABox(FinalMailBoxUser sender, FinalMailBoxUser receiver ,Message message);
-    public void sendNews(FinalMailBoxUser sender, Message message);
+    public String sendNews(FinalMailBoxUser sender, Message message);
     
 }
