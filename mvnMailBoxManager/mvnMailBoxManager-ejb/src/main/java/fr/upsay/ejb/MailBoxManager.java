@@ -63,6 +63,7 @@ public class MailBoxManager implements IMailBoxManager {
 
     @Override
     public void sendAMessageToABox(FinalMailBoxUser sender, FinalMailBoxUser receiver, Message message) {
+       /*
         List<FinalMailBoxUser> l = finalMailBoxUserFacade.findAll();
         System.out.println("je suis la 2");
         FinalMailBoxUser userf=null;
@@ -81,8 +82,25 @@ public class MailBoxManager implements IMailBoxManager {
         System.out.println("c'est moi qui bug"+ box.getMailBoxName());
         
         box.addMessage(message);
+        
         System.out.println("non c'est moi");
         mailBoxFacade.edit(box);
+        
+        */
+       
+        message.setSenderName(sender.getUsername());
+        message.setReceiverName(receiver.getUsername());
+        message.setSendingDate(LocalDate.now());
+        message.setIsRead(false);
+        
+        MailBox box = receiver.getMailBox();
+        
+        box.addMessage(message);
+        
+        mailBoxFacade.edit(box);
+        finalMailBoxUserFacade.edit(receiver);
+        
+        
         
        
         

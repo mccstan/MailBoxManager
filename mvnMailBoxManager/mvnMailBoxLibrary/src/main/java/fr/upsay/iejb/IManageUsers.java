@@ -18,7 +18,7 @@ public interface IManageUsers {
     
     public boolean addUser(FinalMailBoxUser finalUser);
     public boolean removeUser(FinalMailBoxUser finalUser);
-    public List<AbstractFinalUser> lookupAllUsers();
+    public List<FinalMailBoxUser> lookupAllUsers();
     public NewsGroupRight lookupAUserRights( FinalMailBoxUser finalMailBoxUser);
     public boolean updateAUserRights(FinalMailBoxUser finalUser, NewsGroupRight newsGroupRight);
 }

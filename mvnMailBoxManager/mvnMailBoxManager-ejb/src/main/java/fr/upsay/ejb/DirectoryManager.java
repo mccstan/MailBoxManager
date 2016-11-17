@@ -35,9 +35,8 @@ public class DirectoryManager implements IManageUsers{
     public boolean addUser(FinalMailBoxUser finalUser) {
         NewsGroupRight groupRight = new NewsGroupRight(true, false);
         finalUser.updateUserRight(groupRight);
-        MailBox mailBox = new MailBox(finalUser, finalUser.getUsername()+"MainBox");
+        MailBox mailBox = new MailBox(finalUser.getUsername(), finalUser.getUsername()+"MainBox");
         finalUser.setMailBox(mailBox);
-        //mailBoxFacade.create(mailBox);
         finalMailBoxUserFacade.create(finalUser);
         return true;
     }
@@ -49,7 +48,7 @@ public class DirectoryManager implements IManageUsers{
     }
 
     @Override
-    public List<AbstractFinalUser> lookupAllUsers() {
+    public List<FinalMailBoxUser> lookupAllUsers() {
         return finalMailBoxUserFacade.findAll();
     }
 

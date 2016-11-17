@@ -26,8 +26,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mccstan
  */
-@WebServlet(name = "TestEJB", urlPatterns = {"/TestEJB"})
-public class TestEJB extends HttpServlet {
+@WebServlet(name = "Test1", urlPatterns = {"/test1"})
+public class Test1 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,12 +38,6 @@ public class TestEJB extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Resource(mappedName = "mailBoxFacade")
-    AbstractFacadeRemote mailBoxFacade;
-    
-    @Resource(mappedName = "finalMailBoxUserFacade")
-    AbstractFacadeRemote finalMailBoxUserFacade;
-    
     @Resource(mappedName = "mailBoxManager")
      IMailBoxManager mailBoxManager;
     
@@ -87,15 +81,7 @@ public class TestEJB extends HttpServlet {
         FinalMailBoxUser user2 = new FinalMailBoxUser("Maturin","1234");
         directoryManager.addUser(user2);
         
-        Message m1 = new Message ("subject1","body1");
-        Message m2 = new Message ("subject2","body2");
-        
-        mailBoxManager.sendAMessageToABox(user1, user2, m1);
-        mailBoxManager.sendAMessageToABox(user1, user2, m2);
-        
-        
-        
-            
+         
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
