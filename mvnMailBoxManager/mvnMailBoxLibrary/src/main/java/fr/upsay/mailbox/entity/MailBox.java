@@ -20,7 +20,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class MailBox  extends AbstractBox implements Serializable{
     
-    @OneToOne(cascade = CascadeType.PERSIST)
+   @OneToOne(cascade = CascadeType.PERSIST)
     private FinalMailBoxUser owner;
     
     private String mailBoxName;

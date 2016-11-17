@@ -36,7 +36,9 @@ public class DirectoryManager implements IManageUsers{
         NewsGroupRight groupRight = new NewsGroupRight(true, false);
         finalUser.updateUserRight(groupRight);
         MailBox mailBox = new MailBox(finalUser, finalUser.getUsername()+"MainBox");
-        mailBoxFacade.create(mailBox);
+        finalUser.setMailBox(mailBox);
+        //mailBoxFacade.create(mailBox);
+        finalMailBoxUserFacade.create(finalUser);
         return true;
     }
 

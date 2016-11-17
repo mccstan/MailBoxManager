@@ -26,6 +26,8 @@ public class FinalMailBoxUser extends AbstractFinalUser implements Serializable 
     @OneToOne(cascade = CascadeType.PERSIST)
     private MailBox mailBox;
 
+    
+
     public FinalMailBoxUser() {
         super();
     }
@@ -47,6 +49,10 @@ public class FinalMailBoxUser extends AbstractFinalUser implements Serializable 
 
     public MailBox getMailBox() {
         return mailBox;
+    }
+    
+    public void setMailBox(MailBox mailBox) {
+        this.mailBox = mailBox;
     }
     
 }
