@@ -99,6 +99,33 @@ public class Test3 extends HttpServlet {
             out.println("<h3>Renvoi du message à la NewsBox</h3>");
             
             out.println("Réponse du MailBoxManager : "+mailBoxManager.sendNews(u1, m)+"</br>");
+            out.println("<h3>Affichage des Messages User1</h3>");
+            List<FinalMailBoxUser> list = directoryManager.lookupAllUsers();
+            FinalMailBoxUser user1 = boxUsers.get(0);
+            FinalMailBoxUser user2 = boxUsers.get(1);
+            List<Message> listMessag2 = mailBoxManager.readAUserAllMessages(user2);
+            List<Message> listMessag1 = mailBoxManager.readAUserAllMessages(user1);
+            
+            out.println("<ul style=\"list-style-type:disc\">");
+            for(Message message : listMessag1){
+                out.println("<li> id = "+message.getId()+"</li>");
+                out.println("<li> subject = " +message.getSubject()+"</li>");
+                out.println("<li> body = "+message.getBody()+"</li>");
+                out.println("</br>");
+                
+            }
+            out.println("</ul>");
+            
+            out.println("<h3>Affichage des Messages User2</h3>");
+            out.println("<ul style=\"list-style-type:disc\">");
+            for(Message message : listMessag2){
+                out.println("<li> id = "+message.getId()+"</li>");
+                out.println("<li> subject = " +message.getSubject()+"</li>");
+                out.println("<li> body = "+message.getBody()+"</li>");
+                out.println("</br>");
+            }
+            
+            out.println("</ul>");
             out.println("</body>");
             out.println("</html>");
         }
