@@ -22,10 +22,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author mccstan
+ * @author mccstan, slimani
  */
-@WebServlet(name = "Test2", urlPatterns = {"/test2"})
-public class Test2 extends HttpServlet {
+@WebServlet(name = "MailBoxManagerSendToBox", urlPatterns = {"/mmsendtobox"})
+public class MailBoxManagerSendToBox extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,14 +47,6 @@ public class Test2 extends HttpServlet {
     
     @Resource(mappedName = "directoryManager")
     IManageUsers directoryManager;
-    
-    /*
-    @Resource(mappedName = "mailBoxFacade")
-    AbstractFacadeRemote mailBoxFacade;
-    
-    @Resource(mappedName = "finalMailBoxUserFacade")
-    AbstractFacadeRemote finalMailBoxUserFacade;
-    */
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -83,12 +75,12 @@ public class Test2 extends HttpServlet {
        List<Message> listMessag2 = mailBoxManager.readAUserAllMessages(user2);
        List<Message> listMessag1 = mailBoxManager.readAUserAllMessages(user1);
          System.out.println("la taille 1 "+listMessag1.size());
-         System.out.println("la taille 1 "+listMessag2.size());
+         System.out.println("la taille 2 "+listMessag2.size());
             
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet TestEJB</title>");            
+            out.println("<title>MailBox Manager Box</title>");            
             out.println("</head>");
             out.println("<body>");
             out.println("<h3>1- Envoi des message entre utilisateurs</h3>");
